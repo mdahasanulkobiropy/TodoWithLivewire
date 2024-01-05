@@ -4,8 +4,8 @@ namespace App\Livewire;
 
 use App\Models\User;
 use Livewire\Component;
-use Livewire\Attributes\Rule;
 use Livewire\Attributes\Layout;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 #[Layout('layout.app')]
@@ -28,7 +28,8 @@ class RegistrationPage extends Component
         return view('livewire.registration-page');
     }
 
-    public function registerUser(){
+    public function registerUser()
+    {
 
         $this->validate();
         $user = User::create([
@@ -36,6 +37,7 @@ class RegistrationPage extends Component
             'name' => $this->name,
             'password' => Hash::make($this->password),
         ]);
+        Auth::login($user);
         session()->flash('message', 'User registered successfully!');
         return redirect()->to('/');
     }
