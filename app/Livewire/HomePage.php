@@ -15,13 +15,19 @@ class HomePage extends Component
     public $is_task_gp_urgent;
 
     public $task_title;
+    public $up_task_gp_id;
+    public $up_task_title;
+    public $up_task_des;
+    public $up_is_task_urgent;
     public $task_des;
     public $is_task_urgent;
     public $task_gp_id;
     public $is_complete;
     public $task_id;
-
+    public $up_id;
     public $taskSearch;
+    public $taskEditingId;
+
     public function render()
     {
         if(!Auth::user()){
@@ -103,7 +109,27 @@ class HomePage extends Component
             session()->flash('message', 'Task delete successfully!');
         }
     }
+    public function editTaskCreate($task){
+        $this->taskEditingId = $task;
+    }
 
+    public function updatetaskCreate($taskId)
+    {
+        $task = Task::findOrFail($taskId);
+
+        $taskData = [
+            'task_title' => $this->up_task_title,
+            'task_des' => $this->up_task_des,
+            'task_gp_id' => $this->up_task_gp_id,
+            'is_task_urgent' => $this->is_task_urgent ? 'yes' : 'no',
+            'created_by' => Auth::user()->id,
+        ];
+
+        $task->update($taskData);
+
+        session()->flash('message', 'Task updated successfully!');
+        $this->reset(['up_task_title', 'up_task_des', 'is_task_urgent','taskEditingId']);
+    }
     public function taskStatusUpdate($taskid){
 
         $task =Task::find($taskid);
