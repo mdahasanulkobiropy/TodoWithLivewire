@@ -39,9 +39,6 @@
                              + New Group
                          </button>
                      @endif
-
-
-
                  </div>
              </div>
              <div class="w-3/4">
@@ -182,7 +179,6 @@
              inputContainer.classList.toggle('hidden');
          });
 
-
          function toggleIcons(checkbox) {
              var icons = checkbox.closest('.flex').querySelectorAll('.bi');
 
@@ -195,15 +191,12 @@
              });
          }
 
-
          var checkboxes = document.querySelectorAll(".checkbox");
 
          checkboxes.forEach(function(checkbox) {
              checkbox.addEventListener("change", function() {
                  toggleIcons(checkbox);
              });
-
-
              toggleIcons(checkbox);
          });
 

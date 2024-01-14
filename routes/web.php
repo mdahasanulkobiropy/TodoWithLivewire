@@ -26,3 +26,6 @@ Route::middleware('guest')->group(function () {
 });
 Route::get('/', HomePage::class);
 Route::get('/logout', LogoutPage::class);
+Route::fallback(function(){
+    return view('errors.404');
+});
