@@ -2,7 +2,7 @@
          @if (Auth::check())
              <div class="w-[300px] h-screen flex ">
                  <div class="p-2.5 mt-3">
-                     <h1 class="font-bold text-xl w-full">Welcome John Doe</h1>
+                     <h1 class="font-bold text-xl w-full">Welcome {{Auth::user()->name}}</h1>
                      <h2 class="text-[#ADACB0] text-sm mt-16">Tasks Group</h2>
                      <h1 wire:click="showTasksUnderGroup({{ $urgent_task->id }})"
                          class="mt-5 ml-2 font-semibold cursor-pointer color text-sm">
